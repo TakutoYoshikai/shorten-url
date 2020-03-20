@@ -39,6 +39,7 @@ func gormConnectForTest() *gorm.DB {
 
 func migrate(db *gorm.DB) {
 	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.URL{})
 }
 
 func InitDB() {
