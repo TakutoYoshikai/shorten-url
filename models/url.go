@@ -10,7 +10,7 @@ type URL struct {
 	gorm.Model
 	SrcId  string `form:"src" binding:"required" gorm:"unique;not null"`
 	DstUrl string `form:"dst" binding:"required" gorm:"not null"`
-	UserId uint   `form:"userId" binding:"required" gorm:"not null"`
+	UserId uint   `form:"userId"`
 }
 
 func (url URL) Validate(db *gorm.DB) {
