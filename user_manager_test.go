@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCreateUser(t *testing.T) {
+func TestUser(t *testing.T) {
 	InitDBForTest()
 	email := "takuto.yoshikai@gmail.com"
 	password := "takuto01"
