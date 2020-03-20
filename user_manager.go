@@ -27,3 +27,13 @@ func CreateUser(email string, password string) []error {
 	}
 	return nil
 }
+
+func GetUser(email string) *models.User {
+	var user models.User
+	db := DBManager.DB
+	err := db.First(&user, "email = ?", email).Error
+	if err != nil {
+		return nil
+	}
+	return &user
+}
