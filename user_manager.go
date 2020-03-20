@@ -37,3 +37,15 @@ func GetUser(email string) *models.User {
 	}
 	return &user
 }
+
+func Login(email string, password string) *models.User {
+	user := GetUser(email)
+	if user == nil {
+		return nil
+	}
+	dbPassword := user.EncryptedPassword
+	if err := CompareHashAndPassword(dbPassword, password); err != nil {
+		return nil
+	}
+	return user
+}
