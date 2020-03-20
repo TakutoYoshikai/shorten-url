@@ -21,8 +21,12 @@ func RandString(n int) string {
 
 func CreateURL(user *models.User, dstUrl string) []error {
 	db := DBManager.DB
+	var userId int = -1
+	if user != nil {
+		userId = int(user.ID)
+	}
 	url := models.URL{
-		UserId: user.ID,
+		UserId: userId,
 		DstUrl: dstUrl,
 		SrcId:  RandomId(),
 	}
