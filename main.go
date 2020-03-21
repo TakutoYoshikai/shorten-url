@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
-	InitDB()
 	rand.Seed(time.Now().UnixNano())
+	InitDB()
+	InitServer()
 }
