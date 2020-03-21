@@ -3,3 +3,4 @@ production.db
 test.db
 shorten-url
 .env
+vendor

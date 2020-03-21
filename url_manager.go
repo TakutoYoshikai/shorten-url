@@ -19,7 +19,7 @@ func RandString(n int) string {
 	return string(b)
 }
 
-func CreateURL(user *models.User, dstUrl string) []error {
+func CreateURL(user *models.User, dstUrl string) (*models.URL, []error) {
 	db := DBManager.DB
 	var userId int = -1
 	if user != nil {
@@ -30,12 +30,12 @@ func CreateURL(user *models.User, dstUrl string) []error {
 		DstUrl: dstUrl,
 		SrcId:  RandomId(),
 	}
-	if err := db.Create(
+	if errs := db.Create(
 		&url,
-	).GetErrors(); err != nil {
-		return err
+	).GetErrors(); errs != nil && len(errs) > 0 {
+		return nil, errs
 	}
-	return nil
+	return &url, nil
 }
 
 func GetURL(srcId string) *models.URL {

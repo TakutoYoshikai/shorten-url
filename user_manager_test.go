@@ -44,7 +44,7 @@ func TestUser(t *testing.T) {
 	}
 	user = Login("notexists", password)
 	if user != nil {
-		t.Fatal("logged in as not exists user")
+		t.Fatal("logged in as not existing user")
 		return
 	}
 
