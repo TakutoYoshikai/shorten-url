@@ -50,3 +50,10 @@ func Login(email string, password string) *models.User {
 	}
 	return user
 }
+
+func AllURL(user *models.User) []models.URL {
+	var urls []models.URL
+	db := DBManager.DB
+	db.Where("user_id = ?", int(user.ID)).Find(&urls)
+	return urls
+}
