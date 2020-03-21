@@ -53,4 +53,9 @@ func TestServer(t *testing.T) {
 		return
 	}
 
+	statusCode, _ = SendJSON(r, "/user", `{"email": "takuto.yoshikai.post@gmail.com", "password": "takuto01"}`)
+	if statusCode != 201 {
+		t.Fatal("couldn't create a user")
+		return
+	}
 }
