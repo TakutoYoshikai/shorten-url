@@ -35,4 +35,26 @@ func TestUrl(t *testing.T) {
 		t.Fatal("user id was not saved")
 		return
 	}
+	url, errs = CreateURL(nil, dstUrl)
+	if errs != nil && len(errs) > 0 {
+		t.Fatal(errs)
+		return
+	}
+	if url == nil {
+		t.Fatal("url does not exists")
+		return
+	}
+	if len(url.SrcId) != 5 {
+		t.Fatal("url id is not 5")
+		return
+	}
+	if url.DstUrl != dstUrl {
+		t.Fatal("dst url was not saved")
+		return
+	}
+	if url.UserId != -1 {
+		t.Fatal("user id was not saved correctly")
+		return
+	}
+
 }
