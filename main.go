@@ -8,5 +8,6 @@ import (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	InitDB()
-	InitServer()
+	r := InitServer()
+	r.Run()
 }

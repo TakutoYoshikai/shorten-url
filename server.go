@@ -67,11 +67,11 @@ func LoginRequest(c *gin.Context) {
 	}
 }
 
-func InitServer() {
+func InitServer() *gin.Engine {
 	r := gin.Default()
 	r.GET("/:id", RedirectByIdRequest)
 	r.POST("/create", CreateURLRequest)
 	r.POST("/user", CreateUserRequest)
-	r.GET("/login", LoginRequest)
-	r.Run()
+	r.POST("/login", LoginRequest)
+	return r
 }
