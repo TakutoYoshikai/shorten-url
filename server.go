@@ -2,10 +2,17 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 type URLRequestBody struct {
 	Url string `json:"url"`
+}
+
+func CreateURLString(id string) string {
+	protocol := os.Getenv("protocol")
+	host := os.Getenv("host")
+	return protocol + "://" + host + "/" + id
 }
 
 func InitServer() {
@@ -27,7 +34,7 @@ func InitServer() {
 			c.String(400, "")
 			return
 		}
-		c.String(200, url.SrcId)
+		c.String(200, CreateURLString(url.SrcId))
 	})
 	r.Run()
 }
