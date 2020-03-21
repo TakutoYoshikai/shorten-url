@@ -4,3 +4,5 @@ test.db
 shorten-url
 .env
 vendor
+logs/*
+!logs/.keep

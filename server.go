@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"io"
 	"os"
 )
 
@@ -68,6 +69,10 @@ func LoginRequest(c *gin.Context) {
 }
 
 func InitServer() *gin.Engine {
+	file, err := os.OpenFile("logs/gin.log", os.O_WRONLY|os.O_CREATE, 0666)
+	if file != nil && err == nil {
+		gin.DefaultWriter = io.MultiWriter(file)
+	}
 	r := gin.Default()
 	r.GET("/:id", RedirectByIdRequest)
 	r.POST("/create", CreateURLRequest)
