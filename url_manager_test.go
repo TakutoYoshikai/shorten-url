@@ -9,8 +9,11 @@ func TestUrl(t *testing.T) {
 	email := "takuto.yoshikai.url@gmail.com"
 	password := "takuto01"
 	dstUrl := "https://yoshikai.net"
-	_ = CreateUser(email, password)
-	user := GetUser(email)
+	user, errs := CreateUser(email, password)
+	if user == nil || (errs != nil && len(errs) > 0) {
+		t.Fatal("user is not created")
+		return
+	}
 	url, errs := CreateURL(user, dstUrl)
 	if errs != nil && len(errs) > 0 {
 		t.Fatal(errs)

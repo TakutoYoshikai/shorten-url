@@ -14,18 +14,19 @@ func CompareHashAndPassword(hash, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 }
 
-func CreateUser(email string, password string) []error {
+func CreateUser(email string, password string) (*models.User, []error) {
 	encryptedPassword, _ := PasswordEncrypt(password)
 	db := DBManager.DB
-	if err := db.Create(
-		&models.User{
-			Email:             email,
-			EncryptedPassword: encryptedPassword,
-		},
-	).GetErrors(); err != nil {
-		return err
+	user := models.User{
+		Email:             email,
+		EncryptedPassword: encryptedPassword,
 	}
-	return nil
+	if errs := db.Create(
+		&user,
+	).GetErrors(); errs != nil && len(errs) > 0 {
+		return nil, errs
+	}
+	return &user, nil
 }
 
 func GetUser(email string) *models.User {

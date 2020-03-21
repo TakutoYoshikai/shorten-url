@@ -8,17 +8,21 @@ func TestUser(t *testing.T) {
 	InitDBForTest()
 	email := "takuto.yoshikai@gmail.com"
 	password := "takuto01"
-	err := CreateUser(email, password)
-	if err != nil && len(err) > 0 {
-		t.Fatal(err)
+	user, errs := CreateUser(email, password)
+	if errs != nil && len(errs) > 0 {
+		t.Fatal(errs)
 		return
 	}
-	err = CreateUser("helloworld", password)
-	if err == nil || len(err) == 0 {
+	if user == nil {
+		t.Fatal("user isn't created")
+		return
+	}
+	user, errs = CreateUser("helloworld", password)
+	if errs == nil || len(errs) == 0 || user != nil {
 		t.Fatal("It could register not email string as email")
 		return
 	}
-	user := GetUser(email)
+	user = GetUser(email)
 	if user == nil {
 		t.Fatal("Couldn't get user")
 		return
