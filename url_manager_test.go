@@ -35,6 +35,20 @@ func TestUrl(t *testing.T) {
 		t.Fatal("user id was not saved")
 		return
 	}
+	tmpUrl := GetURL(url.SrcId)
+	if tmpUrl == nil {
+		t.Fatal("url not found")
+		return
+	}
+	if tmpUrl.SrcId != url.SrcId || tmpUrl.DstUrl != url.DstUrl || tmpUrl.ID != url.ID || tmpUrl.UserId != url.UserId {
+		t.Fatal("url property is wrong")
+		return
+	}
+	url = GetURL("notexists")
+	if url != nil {
+		t.Fatal("found not existing url")
+		return
+	}
 	url, errs = CreateURL(nil, dstUrl)
 	if errs != nil && len(errs) > 0 {
 		t.Fatal(errs)
@@ -54,6 +68,15 @@ func TestUrl(t *testing.T) {
 	}
 	if url.UserId != -1 {
 		t.Fatal("user id was not saved correctly")
+		return
+	}
+	tmpUrl = GetURL(url.SrcId)
+	if tmpUrl == nil {
+		t.Fatal("url not found")
+		return
+	}
+	if tmpUrl.SrcId != url.SrcId || tmpUrl.DstUrl != url.DstUrl || tmpUrl.ID != url.ID || tmpUrl.UserId != url.UserId {
+		t.Fatal("url property is wrong")
 		return
 	}
 

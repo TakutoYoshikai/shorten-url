@@ -41,7 +41,7 @@ func CreateURL(user *models.User, dstUrl string) (*models.URL, []error) {
 func GetURL(srcId string) *models.URL {
 	var url models.URL
 	db := DBManager.DB
-	err := db.First(&url, "src = ?", srcId).Error
+	err := db.First(&url, "src_id = ?", srcId).Error
 	if err != nil {
 		return nil
 	}
