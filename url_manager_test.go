@@ -79,5 +79,15 @@ func TestUrl(t *testing.T) {
 		t.Fatal("url property is wrong")
 		return
 	}
+	err := DeleteURL(url)
+	if err != nil {
+		t.Fatal("couldn't delete url")
+		return
+	}
+	tmpUrl = GetURL(url.SrcId)
+	if tmpUrl != nil {
+		t.Fatal("couldn't delete url")
+		return
+	}
 
 }

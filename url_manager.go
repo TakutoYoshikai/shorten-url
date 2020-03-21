@@ -47,3 +47,12 @@ func GetURL(srcId string) *models.URL {
 	}
 	return &url
 }
+
+func DeleteURL(url *models.URL) error {
+	db := DBManager.DB
+	err := db.Delete(url).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
